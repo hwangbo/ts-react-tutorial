@@ -4,7 +4,7 @@ type GreetingsProps = {
     name: string;
     mark: string;
     optional?: string;
-    onClick: (name: string) => void; // 아무것도 하지 않아요
+    onClick: (name: string) => void; // 아무것도 반환하지 않아요
 }
 
 function Greetings({name, mark, optional, onClick}: GreetingsProps) {
