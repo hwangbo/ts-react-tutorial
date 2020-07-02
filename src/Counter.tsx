@@ -1,13 +1,23 @@
-import React, {useState} from 'react';
+import React, {useReducer} from 'react';
+
+type Action = { type: 'INCREASE' } | { type: 'DECREASE' };
+
+function reducer(state: number, action: Action): number {
+    switch (action.type) {
+        case 'INCREASE':
+            return state + 1;
+        case 'DECREASE':
+            return state - 1;
+        default:
+            throw new Error('Unhandled action');
+    }
+}
 
 function Counter() {
-    // js와 다른점 : <>로 타입을 명시해준다.
-    // 근데 알아서 타입을 유추하기 때문에 생략해도 된다.
-    // nullable 일 경우 명시해주면 좋다.
-    // 상태의 타입이 까다로운 구조를 가진 객체이거나 배열일 때 명시해주면 좋다.
-    const [count, setCount] = useState<number>(0);
-    const onIncrease = () => setCount(count + 1);
-    const onDecrease = () => setCount(count - 1);
+    const [count, dispatch] = useReducer(reducer, 0);
+    const onIncrease = () => dispatch({ type: 'INCREASE' });
+    const onDecrease = () => dispatch({ type: 'DECREASE' });
+
     return (
         <div>
             <h1>{count}</h1>
